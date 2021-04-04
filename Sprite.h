@@ -3,10 +3,10 @@
 #include <string>
 #include <SDL/SDL.h>
 
-// Sprite class
 class Sprite
 {
 public:
+	explicit Sprite();
 	virtual ~Sprite() {}
 
 	void SetImage(const std::string& filename);

@@ -2,12 +2,16 @@
 #include "Globals.h"
 #include "Utils.h"
 
+Sprite::Sprite() : image(nullptr), draw(true), speed(0) {
+	memset(&imgrect, 0, sizeof(imgrect));
+}
+
 // Functions of Sprite class
 // Change the image to a image that is loaded from a file
 void Sprite::SetImage(const std::string & filename)
 {
 	image = LoadBMP(filename, true);
-	if (image == NULL)
+	if (image == nullptr)
 	{
 		printf("Can't load image!");
 		exit(1);

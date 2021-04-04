@@ -13,9 +13,7 @@
 
 SDL_Texture *bg, * bullet;
 
-SDL_Event event;
 const Uint8 *keys;
-Uint32 lframe;
 int state = SPLASH;
 bool done = false;
 
@@ -26,6 +24,8 @@ Mix_Music *music;
 // The function where everything begins...
 int main(int argc, char *argv[])
 {
+	SDL_Event event;
+
 	// Inits
 	if(InitSDL() != 0)
 	{
@@ -95,7 +95,7 @@ void ShowSplash()
 		// First we need to refresh the keytable array
 		SDL_PumpEvents();
 		// And then we read it out...
-		keys = SDL_GetKeyboardState(NULL);
+		keys = SDL_GetKeyboardState(nullptr);
 		// Now we look, if some special key is pressed
 		if(keys[SDL_SCANCODE_ESCAPE])
 		{
@@ -118,22 +118,18 @@ void InitGame()
 	music = Mix_LoadMUS((ASSET_PATH + "music.wav").c_str());
 	bg = LoadBMP("bg.jpg");
 
-	if(bg == NULL)
+	if(bg == nullptr)
 	{
 		printf("Can't load background image!");
 		exit(1);
 	}
 	
 	bullet = LoadBMP("bullet.bmp");
-	if(bullet == NULL)
+	if(bullet == nullptr)
 	{
 		printf("Can't load bullet image!");
 		exit(1);
 	}
-
-	// Set transparent Colors
-	//SDL_SetColorKey(bullet, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(bullet->format, 255, 0, 255));
-	// Draw BG
 
 	SDL_RenderCopy(renderer, bg, nullptr, nullptr);
 
@@ -148,9 +144,9 @@ void InitGame()
 void UpdateGame()
 {	
 	// Get the time of the start of this frame
-	lframe = SDL_GetTicks();
+	Uint32 lframe = SDL_GetTicks();
 	// Input handling
-	keys = SDL_GetKeyboardState(NULL);
+	keys = SDL_GetKeyboardState(nullptr);
 	// Player 1 Controls
 	if(keys[SDL_SCANCODE_UP])
 	{
