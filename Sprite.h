@@ -13,7 +13,7 @@ public:
 	void SetImage(SDL_Texture* nimage);
 
 	void Visible(bool nstate);
-	bool Visible();
+	bool Visible() const;
 
 	void SetPos(int nx, int ny);
 	void SetSpeed(int nspeed);

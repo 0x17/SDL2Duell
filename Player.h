@@ -12,7 +12,7 @@ public:
 	void Shoot();
 	void MoveBullets(int bspeed);
 	void DrawBullets();
-	int GetHealth();
+	int GetHealth() const;
 	void Hurt();
 	void InvisibleBullet(int bulletnr);
 	bool BulletVisible(int bulletnr);

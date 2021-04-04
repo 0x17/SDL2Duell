@@ -23,11 +23,11 @@ Player::Player(int npnr)
 		break;
 	}
 	// Init the Bullets of the Player
-	for (int i = 0; i < BULLETS; i++)
+	for (auto & b : bullets)
 	{
-		bullets[i].SetSpeed(4);
-		bullets[i].SetImage(bullet);
-		bullets[i].Visible(false);
+		b.SetSpeed(4);
+		b.SetImage(bullet);
+		b.Visible(false);
 	}
 	// Init health and heart stuff for the player
 	health = LIVES;
@@ -44,17 +44,17 @@ void Player::Shoot()
 {
 	if (SDL_GetTicks() - lshoot > RELOADTIME)
 	{
-		for (int i = 0; i < BULLETS; i++)
+		for (auto & b : bullets)
 		{
-			if (!bullets[i].Visible())
+			if (!b.Visible())
 			{
 				int bullet_w;
 				SDL_QueryTexture(bullet, nullptr, nullptr, &bullet_w, nullptr);
 				if (pnr == 1)
-					bullets[i].SetPos(imgrect.x + imgrect.w, imgrect.y + imgrect.w / 2);
+					b.SetPos(imgrect.x + imgrect.w, imgrect.y + imgrect.w / 2);
 				else if (pnr == 2)
-					bullets[i].SetPos(imgrect.x - bullet_w, imgrect.y + imgrect.w / 2);
-				bullets[i].Visible(true);
+					b.SetPos(imgrect.x - bullet_w, imgrect.y + imgrect.w / 2);
+				b.Visible(true);
 				break;
 			}
 		}
@@ -66,29 +66,29 @@ void Player::Shoot()
 // Move all Bullets of this Player which should
 void Player::MoveBullets(int bspeed)
 {
-	for (int i = 0; i < BULLETS; i++)
+	for (auto & b : bullets)
 	{
-		if (bullets[i].Visible())
+		if (b.Visible())
 		{
-			bullets[i].SetSpeed(bspeed);
+			b.SetSpeed(bspeed);
 			if (pnr == 1)
-				bullets[i].Move(RIGHT);
+				b.Move(RIGHT);
 			else if (pnr == 2)
-				bullets[i].Move(LEFT);
+				b.Move(LEFT);
 		}
 	}
 }
 // Draw all Bullets of this Player which should
 void Player::DrawBullets()
 {
-	for (int i = 0; i < BULLETS; i++)
+	for (auto & b : bullets)
 	{
-		if (bullets[i].Visible())
-			bullets[i].Draw();
+		if (b.Visible())
+			b.Draw();
 	}
 }
 // Get the Health of the Player
-int Player::GetHealth() { return health; }
+int Player::GetHealth() const { return health; }
 // Hurts player
 void Player::Hurt()
 {
@@ -113,6 +113,8 @@ void Player::Hurt()
 		else
 			SetImage("player2hurt3.bmp");
 		break;
+    default:
+        break;
 	}
 }
 // Makes a Bullet invisible

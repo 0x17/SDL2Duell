@@ -47,11 +47,14 @@ int main(int argc, char *argv[])
 					done = true;
 				}
 				break;
+            default:
+                break;
 			}
 		}
 		// Gameworks
 		switch(state)
 		{
+        default:
 		case SPLASH:
 			ShowSplash();
 			break;
@@ -222,6 +225,7 @@ void UpdateGame()
 
 	// Wait, that the game won't become faster as 24fps
 	while(SDL_GetTicks() - lframe < 40);
+
 	if(player1->GetHealth() == 0)
 	{
 		SDL_Delay(3000);

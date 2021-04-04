@@ -2,7 +2,7 @@
 #include "Globals.h"
 #include "Utils.h"
 
-Sprite::Sprite() : image(nullptr), draw(true), speed(0) {
+Sprite::Sprite() : image(nullptr), draw(true), speed(0), imgrect() {
 	memset(&imgrect, 0, sizeof(imgrect));
 }
 
@@ -33,7 +33,7 @@ void Sprite::SetImage(SDL_Texture* nimage)
 // Set, if the Sprite is visible or not
 void Sprite::Visible(bool nstate) { draw = nstate; }
 // Check if the Sprite is visible
-bool Sprite::Visible() { return draw; }
+bool Sprite::Visible() const { return draw; }
 // Set the position of the Sprite to the given coords
 void Sprite::SetPos(int nx, int ny)
 {
@@ -47,6 +47,7 @@ void Sprite::Move(int dir)
 {
 	switch (dir)
 	{
+    default:
 	case LEFT:
 		imgrect.x -= speed;
 		break;
