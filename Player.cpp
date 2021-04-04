@@ -14,6 +14,7 @@ Player::Player(int npnr)
 		SetImage("player1.bmp");
 		SetPos(10, 10);
 		break;
+    default:
 	case 2:
 		SetImage("player2.bmp");
 		int w;
